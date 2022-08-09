@@ -81,6 +81,8 @@ class lm4:
 			metadata = item['metadata']
 
 			liz=xbmcgui.ListItem(metadata.get('name',''))
+			if "watchlist" in item["params"] and item["params"]["watchlist"]:
+				liz.setLabel(f"[COLOR blue]{liz.getLabel()}[/COLOR]")
 			
 			ilabels = {
 				"Title": 				metadata.get('name',''),

@@ -18,7 +18,6 @@ import xbmcgui
 import xbmcplugin
 
 
-
 class lm4:
 	def __init__(self):
 		self.modes = {
@@ -47,8 +46,6 @@ class lm4:
 
 	def getSearchString(self):
 		return 'sport'
-
-
 
 	def setSetting(self,k,v):
 		return xbmcplugin.setSetting(int(sys.argv[1]), k, v)
@@ -80,9 +77,13 @@ class lm4:
 			"""	
 			metadata = item['metadata']
 
-			liz=xbmcgui.ListItem(metadata.get('name',''))
-			if "watchlist" in item["params"] and item["params"]["watchlist"]:
-				liz.setLabel(f"[COLOR blue]{liz.getLabel()}[/COLOR]")
+			liz = xbmcgui.ListItem(metadata.get('name',''))
+			if "watchlist" in item["params"]:
+				if item["params"]["watchlist"]:
+					liz.setLabel(f"[COLOR blue]{liz.getLabel()}[/COLOR]")
+			
+			if "contextCommands" in item["params"]:
+				liz.addContextMenuItems(item["params"]["contextCommands"])
 			
 			ilabels = {
 				"Title": 				metadata.get('name',''),
